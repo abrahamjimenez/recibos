@@ -1,0 +1,55 @@
+---
+import {Image} from "astro:assets"
+import logo from "/src/images/logo.webp"
+
+const navigationItems = [
+    {page: "Sales", path: "/receipt/sales-and-repair"},
+    {page: "Payment and Repair", path: "/receipt/payment"},
+];
+---
+
+<header>
+    <a href="/">
+        <Image class="logo" src={logo} alt="" width={115} height={115}/>
+    </a>
+    <ul>
+        {navigationItems.map((item) => (
+                <li>
+                    <a href={item.path}>
+                        {item.page}
+                    </a>
+                </li>
+        ))}
+    </ul>
+</header>
+
+<style lang="scss">
+  header {
+    max-width: 768px;
+    margin: auto;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    padding: 0 63px
+  }
+
+  img {
+    cursor: pointer;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    gap: 40px;
+    font-size: 1.5rem;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        text-decoration-line: underline;
+      }
+    }
+  }
+</style>
