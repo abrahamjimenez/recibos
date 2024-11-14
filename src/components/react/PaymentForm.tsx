@@ -1,9 +1,37 @@
-import React, { type ChangeEvent, type FormEvent, useState } from "react";
+import React, {
+  type ChangeEvent,
+  type FormEvent,
+  useEffect,
+  useState,
+} from "react";
 import PhoneInput, { type Value } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import styles from "./PaymentForm.module.scss";
 
 const PaymentForm = () => {
+  const getCurrentDateTime = () => {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
+  const getCurrentDateTimeFormatted = () => {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+
+    return `${year}-${month}-${day}T${hours}:00`;
+  };
+
   const [tableData, setTableData] = useState<string[]>([]);
   const [customer, setCustomer] = useState({
     customerId: 4,
@@ -15,10 +43,10 @@ const PaymentForm = () => {
   const [order, setOrder] = useState({
     orderId: 1001,
     customerId: 1,
-    dateReceived: "2024-11-01",
-    datePromised: "2024-11-05",
-    remarks: "Soldar cadena $10",
-    totalCharges: 50.0,
+    dateReceived: getCurrentDateTime(),
+    datePromised: getCurrentDateTimeFormatted(),
+    remarks: "",
+    totalCharges: 0,
     deposit: 20.0,
     balanceDue: 30.0,
   });
@@ -31,14 +59,12 @@ const PaymentForm = () => {
   });
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
 
     setCustomer((prevCustomerData) => ({
       ...prevCustomerData,
       name: value,
     }));
-
-    console.log(name, value);
   };
 
   const handlePhone = (e: Value) => {
@@ -48,10 +74,53 @@ const PaymentForm = () => {
     }));
   };
 
+  const handleOrderDate = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    setOrder((prevOrderData) => ({
+      ...prevOrderData,
+      datePromised: value,
+    }));
+  };
+
+  const handleRemarks = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+
+    setOrder((prevOrderData) => ({
+      ...prevOrderData,
+      remarks: value,
+    }));
+  };
+
+  const handleTotalCharges = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    setOrder((prevOrderData) => ({
+      ...prevOrderData,
+      totalCharges: parseFloat(value),
+    }));
+  };
+
+  const handleDeposit = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    setOrder((prevOrderData) => ({
+      ...prevOrderData,
+      deposit: parseFloat(value),
+    }));
+  };
+
+  useEffect(() => {
+    setOrder((prevOrderData) => ({
+      ...prevOrderData,
+      balanceDue: parseFloat((order.totalCharges - order.deposit).toFixed(2)),
+    }));
+  }, [order.totalCharges, order.deposit]);
+
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(customer);
+    console.log(customer, order);
   };
 
   return (
@@ -104,23 +173,51 @@ const PaymentForm = () => {
       <h2>Order</h2>
 
       <label htmlFor="orderDateReceived">Date Received</label>
-      <input type="date" name="orderDateReceived" id="orderDateReceived" />
+      <input
+        type="datetime-local"
+        name="orderDateReceived"
+        id="orderDateReceived"
+        value={order.dateReceived}
+        disabled
+        readOnly
+      />
 
       <label htmlFor="orderDatePromised">Date Promised</label>
       <input
         type="datetime-local"
         name="orderDatePromised"
         id="orderDatePromised"
+        value={order.datePromised}
+        onChange={handleOrderDate}
       />
 
       <label htmlFor="remarks">Remarks</label>
-      <textarea name="remarks" id="remarks" cols={50} rows={4}></textarea>
+      <textarea
+        name="remarks"
+        id="remarks"
+        cols={50}
+        rows={4}
+        value={order.remarks}
+        onChange={handleRemarks}
+      />
 
       <label htmlFor="total">Total Charges</label>
-      <input type="number" name="total" id="total" value={order.totalCharges} />
+      <input
+        type="number"
+        name="total"
+        id="total"
+        value={order.totalCharges}
+        onChange={handleTotalCharges}
+      />
 
       <label htmlFor="deposit">Deposit</label>
-      <input type="text" name="deposit" id="deposit" value={order.deposit} />
+      <input
+        type="number"
+        name="deposit"
+        id="deposit"
+        value={order.deposit}
+        onChange={handleDeposit}
+      />
 
       <p>Balance Due: {order.balanceDue}</p>
 
@@ -130,17 +227,6 @@ const PaymentForm = () => {
 
       <label htmlFor="paymentDateReceived">Date Received</label>
       <input type="date" name="paymentDateReceived" id="paymentDateReceived" />
-
-      <div className={styles.checkboxContainer}>
-        {["cash", "card", "other"].map((name) => (
-          <div key={name} className={styles.checkboxContainerDiv}>
-            <input type="radio" id={name} name="payment" />
-            <label htmlFor={name}>
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-            </label>
-          </div>
-        ))}
-      </div>
 
       <label htmlFor="amount">Amount</label>
       <input type="text" name="amount" id="amount" value={payment.amount} />
