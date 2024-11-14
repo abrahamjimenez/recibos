@@ -1,0 +1,35 @@
+[
+  {
+    "orderId": 1001,
+    "customerId": 1,
+    "dateReceived": "2024-11-01",
+    "datePromised": "2024-11-05",
+    "article": "Watch Repair",
+    "remarks": "Broken strap",
+    "totalCharges": 50.00,
+    "deposit": 20.00,
+    "balanceDue": 30.00
+  },
+  {
+    "orderId": 1002,
+    "customerId": 2,
+    "dateReceived": "2024-11-02",
+    "datePromised": "2024-11-06",
+    "article": "Phone Screen Replacement",
+    "remarks": "Screen cracked",
+    "totalCharges": 100.00,
+    "deposit": 50.00,
+    "balanceDue": 50.00
+  },
+  {
+    "orderId": 1003,
+    "customerId": 1,
+    "dateReceived": "2024-11-03",
+    "datePromised": "2024-11-07",
+    "article": "Laptop Battery Replacement",
+    "remarks": "Battery won't charge",
+    "totalCharges": 75.00,
+    "deposit": 25.00,
+    "balanceDue": 50.00
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "paymentId": 5001,
+    "orderId": 1001,
+    "paymentMethod": "Cash",
+    "amount": 20.00,
+    "dateReceived": "2024-11-01"
+  },
+  {
+    "paymentId": 5002,
+    "orderId": 1002,
+    "paymentMethod": "Card",
+    "amount": 50.00,
+    "dateReceived": "2024-11-02"
+  },
+  {
+    "paymentId": 5003,
+    "orderId": 1003,
+    "paymentMethod": "Card",
+    "amount": 25.00,
+    "dateReceived": "2024-11-03"
+  },
+  {
+    "paymentId": 5004,
+    "orderId": 1003,
+    "paymentMethod": "Cash",
+    "amount": 25.00,
+    "dateReceived": "2024-11-05"
+  }
+]
