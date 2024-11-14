@@ -2,33 +2,38 @@
 import Layout from "../../layouts/Layout.astro";
 import '@fontsource-variable/inter';
 import PaymentForm from "../../components/react/PaymentForm";
+import PaymentData from "../../components/PaymentData.astro";
 ---
 <Layout title="Payment Page">
     <PaymentForm client:idle/>
+
+    <hr>
+
+    <PaymentData/>
 </Layout>
 
-<style>
-    h1 {
-        width: fit-content;
-        margin-left: 33%;
-        font-size: 96px;
-        font-weight: bold;
-        font-family: 'Inter Variable', sans-serif;
-    }
+<style lang="scss">
+  h1 {
+    width: fit-content;
+    margin-left: 33%;
+    font-size: 96px;
+    font-weight: bold;
+    font-family: 'Inter Variable', sans-serif;
+  }
 
-    span {
-        font-weight: normal;
-        font-size: 1rem;
-    }
+  span {
+    font-weight: normal;
+    font-size: 1rem;
+  }
 
-    div {
-        display: flex;
+  div {
+    display: flex;
 
-        input {
-            border: 0;
-            outline: 0;
-            border-bottom: 1px solid black;
-            width: 100%;
-        }
+    input {
+      border: 0;
+      outline: 0;
+      border-bottom: 1px solid black;
+      width: 100%;
     }
+  }
 </style>
