@@ -40,20 +40,20 @@ const PaymentForm = () => {
     phone: "",
   });
   const [order, setOrder] = useState({
-    orderId: 1001,
-    customerId: 1,
+    orderId: 1004,
+    customerId: 4,
     dateReceived: getCurrentDateTime(),
     datePromised: getCurrentDateTimeFormatted(),
     remarks: "",
     totalCharges: 0,
     deposit: 0,
-    balanceDue: 30.0,
+    balanceDue: 0,
   });
   const [payment, setPayment] = useState({
-    paymentId: 5001,
-    orderId: 1001,
+    paymentId: 5004,
+    orderId: 1004,
     paymentMethod: "Cash",
-    amount: 20,
+    amount: 0,
     dateReceived: getCurrentDateTime(),
   });
 
