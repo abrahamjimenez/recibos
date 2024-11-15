@@ -32,7 +32,6 @@ const PaymentForm = () => {
     return `${year}-${month}-${day}T${hours}:00`;
   };
 
-  const [tableData, setTableData] = useState<string[]>([]);
   const [customer, setCustomer] = useState({
     customerId: 4,
     name: "",
