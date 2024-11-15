@@ -47,15 +47,15 @@ const PaymentForm = () => {
     datePromised: getCurrentDateTimeFormatted(),
     remarks: "",
     totalCharges: 0,
-    deposit: 20.0,
+    deposit: 0,
     balanceDue: 30.0,
   });
   const [payment, setPayment] = useState({
     paymentId: 5001,
     orderId: 1001,
     paymentMethod: "Cash",
-    amount: 20.0,
-    dateReceived: "2024-11-01",
+    amount: 20,
+    dateReceived: getCurrentDateTime(),
   });
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -95,32 +95,49 @@ const PaymentForm = () => {
   const handleTotalCharges = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
+    const newAmount = value === "" ? 0 : parseFloat(value);
+
     setOrder((prevOrderData) => ({
       ...prevOrderData,
-      totalCharges: parseFloat(value),
+      totalCharges: newAmount,
     }));
   };
 
   const handleDeposit = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
+    const newAmount = value === "" ? 0 : parseFloat(value);
+
     setOrder((prevOrderData) => ({
       ...prevOrderData,
-      deposit: parseFloat(value),
+      deposit: newAmount,
     }));
   };
 
   useEffect(() => {
     setOrder((prevOrderData) => ({
       ...prevOrderData,
-      balanceDue: parseFloat((order.totalCharges - order.deposit).toFixed(2)),
+      balanceDue: parseFloat(
+        (order.totalCharges - order.deposit - payment.amount).toFixed(2),
+      ),
     }));
-  }, [order.totalCharges, order.deposit]);
+  }, [order.totalCharges, order.deposit, payment.amount]);
+
+  const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    const newAmount = value === "" ? 0 : parseFloat(value);
+
+    setPayment((prevPaymentData) => ({
+      ...prevPaymentData,
+      amount: newAmount,
+    }));
+  };
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(customer, order);
+    console.log(customer, order, payment);
   };
 
   return (
@@ -206,7 +223,7 @@ const PaymentForm = () => {
         type="number"
         name="total"
         id="total"
-        value={order.totalCharges}
+        value={order.totalCharges === 0 ? "" : order.totalCharges}
         onChange={handleTotalCharges}
       />
 
@@ -215,7 +232,7 @@ const PaymentForm = () => {
         type="number"
         name="deposit"
         id="deposit"
-        value={order.deposit}
+        value={order.deposit === 0 ? "" : order.deposit}
         onChange={handleDeposit}
       />
 
@@ -226,10 +243,25 @@ const PaymentForm = () => {
       <h2>Payment</h2>
 
       <label htmlFor="paymentDateReceived">Date Received</label>
-      <input type="date" name="paymentDateReceived" id="paymentDateReceived" />
+      <input
+        type="datetime-local"
+        name="paymentDateReceived"
+        id="paymentDateReceived"
+        value={payment.dateReceived}
+        disabled
+        readOnly
+      />
 
       <label htmlFor="amount">Amount</label>
-      <input type="text" name="amount" id="amount" value={payment.amount} />
+      <input
+        type="number"
+        name="amount"
+        id="amount"
+        value={payment.amount === 0 ? "" : payment.amount}
+        onChange={handleAmount}
+      />
+
+      <p>Balance Due: {order.balanceDue}</p>
 
       <button type="submit">Submit</button>
     </form>
