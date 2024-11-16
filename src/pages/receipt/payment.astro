@@ -1,13 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import '@fontsource-variable/inter';
+import "@fontsource-variable/inter";
 import PaymentForm from "../../components/react/PaymentForm";
 import PaymentData from "../../components/PaymentData.astro";
 ---
-<Layout title="Payment Page">
-    <PaymentForm client:idle/>
 
-    <!--<PaymentData/>-->
+<Layout title="Payment Page">
+  <PaymentForm client:idle />
+
+  <!--<PaymentData/>-->
 </Layout>
 
 <style lang="scss">
@@ -16,7 +17,7 @@ import PaymentData from "../../components/PaymentData.astro";
     margin-left: 33%;
     font-size: 96px;
     font-weight: bold;
-    font-family: 'Inter Variable', sans-serif;
+    font-family: "Inter Variable", sans-serif;
   }
 
   span {

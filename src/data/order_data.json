@@ -6,9 +6,9 @@
     "datePromised": "2024-11-05",
     "article": "Watch Repair",
     "remarks": "Broken strap",
-    "totalCharges": 50.00,
-    "deposit": 20.00,
-    "balanceDue": 30.00
+    "totalCharges": 50.0,
+    "deposit": 20.0,
+    "balanceDue": 30.0
   },
   {
     "orderId": 1002,
@@ -17,9 +17,9 @@
     "datePromised": "2024-11-06",
     "article": "Phone Screen Replacement",
     "remarks": "Screen cracked",
-    "totalCharges": 100.00,
-    "deposit": 50.00,
-    "balanceDue": 50.00
+    "totalCharges": 100.0,
+    "deposit": 50.0,
+    "balanceDue": 50.0
   },
   {
     "orderId": 1003,
@@ -28,8 +28,8 @@
     "datePromised": "2024-11-07",
     "article": "Laptop Battery Replacement",
     "remarks": "Battery won't charge",
-    "totalCharges": 75.00,
-    "deposit": 25.00,
-    "balanceDue": 50.00
+    "totalCharges": 75.0,
+    "deposit": 25.0,
+    "balanceDue": 50.0
   }
 ]

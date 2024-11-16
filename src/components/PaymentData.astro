@@ -1,45 +1,51 @@
 ---
-import customer from "../data/customer_data.json"
-import order from "../data/order_data.json"
-import payment from "../data/payment_data.json"
+import customer from "../data/customer_data.json";
+import order from "../data/order_data.json";
+import payment from "../data/payment_data.json";
 ---
 
 <h1>Customer</h1>
-{customer.map((customer) => (
-<div>
-    <p>{customer.customerId}</p>
-    <p>{customer.name}</p>
-    <p>{customer.address}</p>
-    <p>{customer.city}</p>
-    <p>{customer.phone}</p>
-</div>
-    ))}
+{
+  customer.map((customer) => (
+    <div>
+      <p>{customer.customerId}</p>
+      <p>{customer.name}</p>
+      <p>{customer.address}</p>
+      <p>{customer.city}</p>
+      <p>{customer.phone}</p>
+    </div>
+  ))
+}
 
 <h1>Order</h1>
-{order.map((order) => (
-<div>
-    <p>{order.orderId}</p>
-    <p>{order.customerId}</p>
-    <p>{order.dateReceived}</p>
-    <p>{order.datePromised}</p>
-    <p>{order.article}</p>
-    <p>{order.remarks}</p>
-    <p>{order.totalCharges}</p>
-    <p>{order.deposit}</p>
-    <p>{order.balanceDue}</p>
-</div>
-    ))}
+{
+  order.map((order) => (
+    <div>
+      <p>{order.orderId}</p>
+      <p>{order.customerId}</p>
+      <p>{order.dateReceived}</p>
+      <p>{order.datePromised}</p>
+      <p>{order.article}</p>
+      <p>{order.remarks}</p>
+      <p>{order.totalCharges}</p>
+      <p>{order.deposit}</p>
+      <p>{order.balanceDue}</p>
+    </div>
+  ))
+}
 
 <h1>Payment</h1>
-{payment.map((payment) => (
-<div>
-    <p>{payment.paymentId}</p>
-    <p>{payment.orderId}</p>
-    <p>{payment.paymentMethod}</p>
-    <p>{payment.amount}</p>
-    <p>{payment.dateReceived}</p>
-</div>
-    ))}
+{
+  payment.map((payment) => (
+    <div>
+      <p>{payment.paymentId}</p>
+      <p>{payment.orderId}</p>
+      <p>{payment.paymentMethod}</p>
+      <p>{payment.amount}</p>
+      <p>{payment.dateReceived}</p>
+    </div>
+  ))
+}
 
 <style lang="scss">
   div {
