@@ -133,10 +133,23 @@ const PaymentForm = () => {
     }));
   };
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(customer, order, payment);
+    // console.log(customer, order, payment);
+
+    const customerData = new FormData();
+    customerData.append("name", customer.name);
+    customerData.append("address", customer.address);
+    customerData.append("city", customer.city);
+    customerData.append("phone", customer.phone);
+
+    const response = await fetch("/api/createCustomer", {
+      method: "POST",
+      body: customerData,
+    });
+    const data = await response.json();
+    console.log(data);
   };
 
   return (
