@@ -138,18 +138,31 @@ const PaymentForm = () => {
 
     // console.log(customer, order, payment);
 
-    const customerData = new FormData();
-    customerData.append("name", customer.name);
-    customerData.append("address", customer.address);
-    customerData.append("city", customer.city);
-    customerData.append("phone", customer.phone);
+    const receiptData = new FormData();
+    // Customer
+    receiptData.append("name", customer.name);
+    receiptData.append("address", customer.address);
+    receiptData.append("city", customer.city);
+    receiptData.append("phone", customer.phone);
+    // Order todo add id logic later
+    receiptData.append("orderDateReceived", order.dateReceived);
+    receiptData.append("orderDatePromised", order.datePromised);
+    receiptData.append("remarks", order.remarks);
+    receiptData.append("totalCharges", order.totalCharges.toString());
+    receiptData.append("deposit", order.deposit.toString());
+    receiptData.append("balanceDue", order.balanceDue.toString());
+    // Payment todo add id logic later
+    receiptData.append("paymentMethod", payment.paymentMethod);
+    receiptData.append("amount", payment.amount.toString());
+    receiptData.append("paymentDateReceived", payment.dateReceived);
 
-    const response = await fetch("/api/createCustomer", {
+    const response = await fetch("/api/createReceipt", {
       method: "POST",
-      body: customerData,
+      body: receiptData,
     });
-    const data = await response.json();
-    console.log(data);
+    const { customerResult, orderResult, paymentResult } =
+      await response.json();
+    console.log(customerResult, orderResult, paymentResult);
   };
 
   return (
