@@ -2,13 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 import "@fontsource-variable/inter";
 import PaymentForm from "../../components/react/PaymentForm";
-import PaymentData from "../../components/PaymentData.astro";
 ---
 
-<Layout title="Payment Page">
+<Layout title="Payment">
   <PaymentForm client:idle />
-
-  <!--<PaymentData/>-->
 </Layout>
 
 <style lang="scss">

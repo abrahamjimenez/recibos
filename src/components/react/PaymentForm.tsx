@@ -144,14 +144,14 @@ const PaymentForm = () => {
     receiptData.append("address", customer.address);
     receiptData.append("city", customer.city);
     receiptData.append("phone", customer.phone);
-    // Order todo add id logic later
+    // Order
     receiptData.append("orderDateReceived", order.dateReceived);
     receiptData.append("orderDatePromised", order.datePromised);
     receiptData.append("remarks", order.remarks);
     receiptData.append("totalCharges", order.totalCharges.toString());
     receiptData.append("deposit", order.deposit.toString());
     receiptData.append("balanceDue", order.balanceDue.toString());
-    // Payment todo add id logic later
+    // Payment
     receiptData.append("paymentMethod", payment.paymentMethod);
     receiptData.append("amount", payment.amount.toString());
     receiptData.append("paymentDateReceived", payment.dateReceived);
