@@ -1,42 +1,41 @@
 ---
-import {type Order} from "../types/ReciptData";
+import { type Order } from "../types/ReciptData";
 const response = await fetch(`${Astro.url.origin}/api/getOrders`);
-const {result}: { result: Order[] } = await response.json();
+const { result }: { result: Order[] } = await response.json();
 ---
+
 <!--todo add search bar
-https://www.prisma.io/docs/orm/prisma-client/queries/filtering-and-sorting-->
-
-{
-    result.map((order) => (
+https://www.prisma.io/docs/orm/prisma-client/queries/filtering-and-sorting-->{
+  result.map((order) => (
     <div>
-        <h2>Order</h2>
-        <p>Received: {order.dateReceived}</p>
-        <p>Promised: {order.datePromised}</p>
-        <p>Remarks: {order.remarks}</p>
-        <p>Total Charges: {order.totalCharges}</p>
-        <p>Deposit: {order.deposit}</p>
-        <p>Balance Due: {order.balanceDue}</p>
+      <h2>Order</h2>
+      <p>Received: {order.dateReceived}</p>
+      <p>Promised: {order.datePromised}</p>
+      <p>Remarks: {order.remarks}</p>
+      <p>Total Charges: {order.totalCharges}</p>
+      <p>Deposit: {order.deposit}</p>
+      <p>Balance Due: {order.balanceDue}</p>
 
-        <h2>Customer</h2>
-        <p>Name: {order.customer.name}</p>
-        <p>Address: {order.customer.address}</p>
-        <p>City: {order.customer.city}</p>
-        <p>Phone: {order.customer.phone}</p>
+      <h2>Customer</h2>
+      <p>Name: {order.customer.name}</p>
+      <p>Address: {order.customer.address}</p>
+      <p>City: {order.customer.city}</p>
+      <p>Phone: {order.customer.phone}</p>
 
-        <h2>Payments</h2>
-        <div>
-            {order.payments.map((payment) => (
-                    <div>
-                        <p>Received: {payment.dateReceived}</p>
-                        <p>Payment Method: {payment.paymentMethod}</p>
-                        <p>Amount: {payment.amount}</p>
-                    </div>
-            ))}
-        </div>
+      <h2>Payments</h2>
+      <div>
+        {order.payments.map((payment) => (
+          <div>
+            <p>Received: {payment.dateReceived}</p>
+            <p>Payment Method: {payment.paymentMethod}</p>
+            <p>Amount: {payment.amount}</p>
+          </div>
+        ))}
+      </div>
+      <hr />
     </div>
-    <hr>
-        ))
-    }
+  ))
+}
 
 <!--todo add pagination
 https://www.prisma.io/docs/orm/prisma-client/queries/pagination -->
