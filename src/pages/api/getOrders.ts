@@ -12,7 +12,7 @@ const getOrders = async () => {
   });
 };
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async () => {
   const result: Order[] = await getOrders();
 
   return new Response(

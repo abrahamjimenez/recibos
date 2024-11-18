@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "prettier": "prettier . --write",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --no-engine"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
