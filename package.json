@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^3.6.2",
+    "@astrojs/svelte": "^6.0.1",
     "@astrojs/vercel": "^7.8.2",
     "@fontsource-variable/inter": "^5.1.0",
     "@prisma/client": "^5.22.0",
@@ -23,6 +24,7 @@
     "react-dom": "^18.3.1",
     "react-phone-number-input": "^3.4.9",
     "sass": "^1.80.6",
+    "svelte": "^5.2.2",
     "typescript": "^5.6.3"
   },
   "devDependencies": {

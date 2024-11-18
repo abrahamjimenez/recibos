@@ -1,0 +1,10 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AddPayment from "../../components/svelte/AddPayment.svelte";
+---
+
+<Layout title="Add Payment">
+  <h1>Add Payment</h1>
+
+  <AddPayment client:only="svelte" />
+</Layout>
