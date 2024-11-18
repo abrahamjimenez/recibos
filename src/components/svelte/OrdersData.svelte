@@ -4,8 +4,6 @@
   let { result }: { result: Order[] } = $props();
 </script>
 
-<!--todo figure out why type safety doesnt work :/
-But data displays fine :D-->
 {#each result as order}
   <h2>Order</h2>
   <p>Received: {order.dateReceived}</p>

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   let phone = $state("");
   let customers = $state([]);
 
@@ -19,9 +19,6 @@
   };
 </script>
 
-<!--todo Set phone input to type of E164
-todo format like in payment page, using a svelte component
-https://www.npmjs.com/package/svelte-tel-input-->
 <label for="phone">Phone</label>
 <input type="text" bind:value={phone} />
 <button type="submit" onclick={handleSubmit}>Submit</button>

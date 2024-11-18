@@ -8,6 +8,7 @@ import PhoneInput, { type Value } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import styles from "./PaymentForm.module.scss";
 
+// todo convert to svelte for faster and cleaner code
 const PaymentForm = () => {
   const getCurrentDateTime = () => {
     const now = new Date();
