@@ -3,12 +3,22 @@ import Layout from "../layouts/Layout.astro";
 import OrdersData from "../components/svelte/OrdersData.svelte";
 import type { Order } from "../types/ReciptData";
 
-const response = await fetch(`${Astro.url.origin}/api/getOrders`);
-const { result }: { result: Order[] } = await response.json();
+const resultData = async () => {
+  try {
+    const response = await fetch(`${Astro.url.origin}/api/getOrders`);
+    const { result }: { result: Order[] } = await response.json();
+    return result;
+  } catch (e) {
+    console.error("Could not fetch orders: ", e);
+  }
+};
+
+const result = await resultData();
+console.log(result);
 ---
 
 <Layout title="Search">
   <h1>All Orders</h1>
 
-  <OrdersData result={result} />
+  {result ? <OrdersData result={result} /> : <p>Could not fetch data</p>}
 </Layout>

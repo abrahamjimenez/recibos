@@ -7,32 +7,13 @@ import React, {
 import PhoneInput, { type Value } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import styles from "./PaymentForm.module.scss";
+import {
+  getCurrentDateTime,
+  getCurrentDateTimeFormatted,
+} from "../../utils/dateUtils.ts";
 
 // todo convert to svelte for faster and cleaner code
 const PaymentForm = () => {
-  const getCurrentDateTime = () => {
-    const now = new Date();
-
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  };
-
-  const getCurrentDateTimeFormatted = () => {
-    const now = new Date();
-
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    const hours = String(now.getHours()).padStart(2, "0");
-
-    return `${year}-${month}-${day}T${hours}:00`;
-  };
-
   const [customer, setCustomer] = useState({
     customerId: 4,
     name: "",

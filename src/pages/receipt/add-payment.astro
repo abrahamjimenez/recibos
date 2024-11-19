@@ -1,10 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import AddPaymentComponent from "../../components/svelte/AddPayment.svelte";
+import AddPaymentDataComponent from "../../components/svelte/AddPaymentData.svelte";
 ---
 
 <Layout title="Add Payment">
   <h1>Add Payment</h1>
 
-  <AddPaymentComponent client:only="svelte" />
+  <AddPaymentDataComponent client:only="svelte" />
 </Layout>
