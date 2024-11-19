@@ -16,6 +16,13 @@ const getCustomers = async (phone: string) => {
         contains: phone,
       },
     },
+    include: {
+      orders: {
+        include: {
+          payments: true,
+        },
+      },
+    },
   });
 };
 
