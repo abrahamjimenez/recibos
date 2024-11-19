@@ -1,3 +1,5 @@
+// todo if payment is blank do not push to database
+
 import React, {
   type ChangeEvent,
   type FormEvent,

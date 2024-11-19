@@ -1,16 +1,14 @@
 import type { APIRoute } from "astro";
 import { prisma } from "./index.ts";
-import { getCurrentDateTimeFormatted } from "../../utils/dateUtils.ts";
+import { getCurrentDateTime } from "../../utils/dateUtils.ts";
 
-// todo the amount, should also subtract from the order balance due
-// todo maybe i need another query? This one is create so idk... maybe it'll allow update
-const createPayment = async (amount: number) => {
+const createPayment = async (amount: number, orderId: number) => {
   return prisma.payment.create({
     data: {
-      orderId: 12,
+      orderId: orderId,
       paymentMethod: "Cash",
       amount: amount,
-      dateReceived: getCurrentDateTimeFormatted(),
+      dateReceived: getCurrentDateTime(),
     },
     include: {
       order: true,
@@ -21,8 +19,9 @@ const createPayment = async (amount: number) => {
 export const POST: APIRoute = async ({ request }) => {
   const data = await request.formData();
   const amount = data.get("amount") as string;
+  const orderId = data.get("orderId") as string;
 
-  await createPayment(parseFloat(amount));
+  await createPayment(parseFloat(amount), parseFloat(orderId));
 
   return new Response(
     JSON.stringify({
