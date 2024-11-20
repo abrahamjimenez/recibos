@@ -14,17 +14,17 @@ datasource db {
 }
 
 model Customer {
-  customerId Int     @id @default(autoincrement())
+  customerId Int    @id @default(autoincrement())
   name       String
   address    String
   city       String
   phone      String
-  orders     Order[]
+  order      Order?
 }
 
 model Order {
   orderId      Int       @id @default(autoincrement())
-  customerId   Int
+  customerId   Int       @unique
   dateReceived String
   datePromised String
   remarks      String
