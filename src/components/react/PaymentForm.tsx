@@ -1,5 +1,3 @@
-// todo if payment is blank do not push to database
-
 import React, {
   type ChangeEvent,
   type FormEvent,
@@ -8,7 +6,7 @@ import React, {
 } from "react";
 import PhoneInput, { type Value } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import styles from "./PaymentForm.module.scss";
+import "./PaymentForm.module.scss";
 import {
   getCurrentDateTime,
   getCurrentDateTimeFormatted,
