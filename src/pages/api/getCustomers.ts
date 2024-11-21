@@ -17,7 +17,7 @@ const getCustomers = async (phone: string) => {
       },
     },
     include: {
-      orders: {
+      order: {
         include: {
           payments: true,
         },
