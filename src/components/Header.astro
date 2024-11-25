@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import logo from "/src/images/logo.webp";
 
 const navigationItems = [
-  { page: "Payment", path: "/receipt/payment" },
+  { page: "Create Receipt", path: "/receipt/create-receipt" },
   { page: "Add Payment", path: "/receipt/add-payment" },
   { page: "Orders", path: "/orders" },
   { page: "Customers", path: "/customers" },
@@ -32,7 +32,7 @@ const navigationItems = [
     display: flex;
     align-items: start;
     justify-content: space-between;
-    padding: 0 63px;
+    padding: 0 40px;
   }
 
   img {
@@ -42,8 +42,7 @@ const navigationItems = [
   ul {
     list-style-type: none;
     display: flex;
-    gap: 40px;
-    font-size: 1.5rem;
+    gap: 8px;
 
     a {
       text-decoration: none;
