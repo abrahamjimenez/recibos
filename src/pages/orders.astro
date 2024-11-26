@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import OrdersData from "../components/svelte/OrdersData.svelte";
 import type { Order } from "../types/ReciptData";
+import { builders } from "prettier/doc";
 
 const resultData = async () => {
   try {
@@ -14,11 +14,87 @@ const resultData = async () => {
 };
 
 const result = await resultData();
+
 console.log(result);
 ---
 
 <Layout title="Search">
   <h1>All Orders</h1>
-
-  {result ? <OrdersData result={result} /> : <p>Could not fetch data</p>}
+  {
+    result ? (
+      result.map((order) => (
+        <div>
+          <table class="order--table">
+            <thead>
+              <tr>
+                <td>Order Id</td>
+                <td>Customer Id</td>
+                <td>Date Received</td>
+                <td>Date Promised</td>
+                <td>Remarks</td>
+                <td>Total Charges</td>
+                <td>Deposit</td>
+                <td>Balance Due</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{order.orderId}</td>
+                <td>{order.customerId}</td>
+                <td>{order.dateReceived}</td>
+                <td>{order.datePromised}</td>
+                <td>{order.remarks}</td>
+                <td>{order.totalCharges}</td>
+                <td>{order.deposit}</td>
+                <td>{order.balanceDue}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      ))
+    ) : (
+      <p>Could not fetch data</p>
+    )
+  }
 </Layout>
+
+<style lang="scss">
+  .customer--container {
+    overflow-x: auto;
+    padding: 8px 0;
+
+    &:nth-child(even) {
+      background-color: lightblue;
+    }
+  }
+
+  .customer--table,
+  .order--table,
+  .payment--table {
+    width: 100%;
+
+    thead {
+      outline: 1px solid black;
+      border-radius: 8px 8px 0 0;
+    }
+
+    tbody {
+      outline: 1px solid black;
+    }
+
+    caption {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    td {
+      outline: none;
+      padding: 4px;
+      border-right: 1px solid black;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+</style>
