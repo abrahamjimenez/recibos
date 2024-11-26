@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+import type { CustomerData } from "../types/CustomerData";
+
+const resultData = async () => {
+  try {
+    const response = await fetch(`${Astro.url.origin}/api/getAllCustomers`);
+    const { result }: { result: CustomerData[] } = await response.json();
+    return result;
+  } catch (e) {
+    console.error("Could not fetch orders: ", e);
+  }
+};
+
+const result = await resultData();
+
+console.log(result);
+---
+
+<Layout title="Customers">
+  <h1>All Customers</h1>
+
+  {
+    result ? (
+      <table class="customer--table">
+        <thead>
+          <tr>
+            <td>Customer Id</td>
+            <td>Name</td>
+            <td>Address</td>
+            <td>City</td>
+            <td>Phone</td>
+          </tr>
+        </thead>
+        {result.map((customer) => (
+          <tbody>
+            <tr>
+              <td>{customer.customerId}</td>
+              <td>{customer.name}</td>
+              <td>{customer.address}</td>
+              <td>{customer.city}</td>
+              <td>{customer.phone}</td>
+            </tr>
+          </tbody>
+        ))}
+      </table>
+    ) : (
+      <p>Could not fetch data</p>
+    )
+  }
+</Layout>
+
+<style lang="scss">
+  .customer--container {
+    overflow-x: auto;
+    padding: 8px 0;
+
+    &:nth-child(even) {
+      background-color: lightblue;
+    }
+  }
+
+  .customer--table,
+  .order--table,
+  .payment--table {
+    width: 100%;
+
+    thead {
+      outline: 1px solid black;
+      border-radius: 8px 8px 0 0;
+    }
+
+    tbody {
+      outline: 1px solid black;
+    }
+
+    caption {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    td {
+      outline: none;
+      padding: 4px;
+      border-right: 1px solid black;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+</style>
