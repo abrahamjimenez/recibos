@@ -4,10 +4,6 @@ import type { Order } from "../../types/ReciptData.ts";
 
 const getOrders = async () => {
   return prisma.order.findMany({
-    include: {
-      customer: true,
-      payments: true,
-    },
     take: 10,
   });
 };
