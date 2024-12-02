@@ -6,6 +6,8 @@
   let phone = $state("");
   let formattedPhone: string = $state("");
   let customers: AddPaymentData[] = $state([]);
+  let showOrderTable = $state(false);
+  let showPaymentTable = $state(false);
 
   const originUrl = window.location.origin;
   const endpoint = `${originUrl}/api/getCustomers`;
@@ -30,6 +32,14 @@
     phone = asYouType.input(phone);
     // This gets characters & sends to body of request
     formattedPhone = asYouType.getChars();
+  };
+
+  const toggleOrderTable = () => {
+    showOrderTable = !showOrderTable;
+  };
+
+  const togglePaymentTable = () => {
+    showPaymentTable = !showPaymentTable;
   };
 </script>
 
@@ -57,56 +67,62 @@
         </tr>
       </tbody>
     </table>
-    <table class="order--table">
-      <caption>{customer.name}'s Order</caption>
-      <thead>
-        <tr>
-          <td>Order ID</td>
-          <td>Customer Id</td>
-          <td>Received</td>
-          <td>Promised</td>
-          <td>Deposit</td>
-          <td>Remarks</td>
-          <td>Total Charges</td>
-          <td>Balance Due</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{customer.order.orderId}</td>
-          <td>{customer.order.customerId}</td>
-          <td>{customer.order.dateReceived}</td>
-          <td>{customer.order.datePromised}</td>
-          <td>{customer.order.deposit}</td>
-          <td>{customer.order.remarks}</td>
-          <td>{customer.order.totalCharges}</td>
-          <td>{customer.order.balanceDue}</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="payment--table">
-      <caption>{customer.name}'s Payments</caption>
-      <thead>
-        <tr>
-          <td>Payment Id</td>
-          <td>Order Id</td>
-          <td>Amount</td>
-          <td>Received</td>
-          <td>Payment Method</td>
-        </tr>
-      </thead>
-      {#each customer.order.payments as payment}
+    <button onclick={toggleOrderTable}>Show Order</button>
+    {#if showOrderTable}
+      <table class="order--table">
+        <caption>{customer.name}'s Order</caption>
+        <thead>
+          <tr>
+            <td>Order ID</td>
+            <td>Customer Id</td>
+            <td>Received</td>
+            <td>Promised</td>
+            <td>Deposit</td>
+            <td>Remarks</td>
+            <td>Total Charges</td>
+            <td>Balance Due</td>
+          </tr>
+        </thead>
         <tbody>
           <tr>
-            <td>{payment.paymentId}</td>
-            <td>{payment.orderId}</td>
-            <td>{payment.amount}</td>
-            <td>{payment.dateReceived}</td>
-            <td>{payment.paymentMethod}</td>
+            <td>{customer.order.orderId}</td>
+            <td>{customer.order.customerId}</td>
+            <td>{customer.order.dateReceived}</td>
+            <td>{customer.order.datePromised}</td>
+            <td>{customer.order.deposit}</td>
+            <td>{customer.order.remarks}</td>
+            <td>{customer.order.totalCharges}</td>
+            <td>{customer.order.balanceDue}</td>
           </tr>
         </tbody>
-      {/each}
-    </table>
+      </table>
+    {/if}
+    <button onclick={togglePaymentTable}>Show Payments</button>
+    {#if showPaymentTable}
+      <table class="payment--table">
+        <caption>{customer.name}'s Payments</caption>
+        <thead>
+          <tr>
+            <td>Payment Id</td>
+            <td>Order Id</td>
+            <td>Amount</td>
+            <td>Received</td>
+            <td>Payment Method</td>
+          </tr>
+        </thead>
+        {#each customer.order.payments as payment}
+          <tbody>
+            <tr>
+              <td>{payment.paymentId}</td>
+              <td>{payment.orderId}</td>
+              <td>{payment.amount}</td>
+              <td>{payment.dateReceived}</td>
+              <td>{payment.paymentMethod}</td>
+            </tr>
+          </tbody>
+        {/each}
+      </table>
+    {/if}
     <h2>Add payment for {customer.name}</h2>
     <AddPayment
       balanceDue={customer.order.balanceDue}
