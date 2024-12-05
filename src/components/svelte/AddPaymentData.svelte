@@ -6,8 +6,6 @@
   let phone = $state("");
   let formattedPhone: string = $state("");
   let customers: AddPaymentData[] = $state([]);
-  let showOrderTable = $state(false);
-  let showPaymentTable = $state(false);
 
   const originUrl = window.location.origin;
   const endpoint = `${originUrl}/api/getCustomers`;
@@ -22,8 +20,20 @@
       }),
     });
     const { result }: { result: AddPaymentData[] } = await response.json();
-    customers = result;
-    console.log(customers[0]);
+    customers = result.map((customer) => ({
+      ...customer,
+      showOrderTable: false,
+      showPaymentTable: false,
+    }));
+    // console.log(customers[0]);
+  };
+
+  const toggleOrderTable = (customer) => {
+    customer.showOrderTable = !customer.showOrderTable;
+  };
+
+  const togglePaymentTable = (customer) => {
+    customer.showPaymentTable = !customer.showPaymentTable;
   };
 
   const handlePhoneInput = () => {
@@ -32,14 +42,6 @@
     phone = asYouType.input(phone);
     // This gets characters & sends to body of request
     formattedPhone = asYouType.getChars();
-  };
-
-  const toggleOrderTable = () => {
-    showOrderTable = !showOrderTable;
-  };
-
-  const togglePaymentTable = () => {
-    showPaymentTable = !showPaymentTable;
   };
 </script>
 
@@ -67,8 +69,10 @@
         </tr>
       </tbody>
     </table>
-    <button onclick={toggleOrderTable}>Show Order</button>
-    {#if showOrderTable}
+    <button onclick={() => toggleOrderTable(customer)}>
+      {customer.showOrderTable ? "Hide order" : "Show order"}
+    </button>
+    {#if customer.showOrderTable}
       <table class="order--table">
         <caption>{customer.name}'s Order</caption>
         <thead>
@@ -97,8 +101,10 @@
         </tbody>
       </table>
     {/if}
-    <button onclick={togglePaymentTable}>Show Payments</button>
-    {#if showPaymentTable}
+    <button onclick={() => togglePaymentTable(customer)}>
+      {customer.showPaymentTable ? "Hide payments" : "Show payments"}
+    </button>
+    {#if customer.showPaymentTable}
       <table class="payment--table">
         <caption>{customer.name}'s Payments</caption>
         <thead>
