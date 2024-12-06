@@ -21,36 +21,34 @@ console.log(result);
   <h1>All Orders</h1>
   {
     result ? (
-      result.map((order) => (
-        <div>
-          <table class="order--table">
-            <thead>
-              <tr>
-                <td>Order Id</td>
-                <td>Customer Id</td>
-                <td>Date Received</td>
-                <td>Date Promised</td>
-                <td>Remarks</td>
-                <td>Total Charges</td>
-                <td>Deposit</td>
-                <td>Balance Due</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{order.orderId}</td>
-                <td>{order.customerId}</td>
-                <td>{order.dateReceived}</td>
-                <td>{order.datePromised}</td>
-                <td>{order.remarks}</td>
-                <td>{order.totalCharges}</td>
-                <td>{order.deposit}</td>
-                <td>{order.balanceDue}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      ))
+      <table class="order--table">
+        <thead>
+          <tr>
+            <td>Order Id</td>
+            <td>Customer Id</td>
+            <td>Date Received</td>
+            <td>Date Promised</td>
+            <td>Remarks</td>
+            <td>Total Charges</td>
+            <td>Deposit</td>
+            <td>Balance Due</td>
+          </tr>
+        </thead>
+        {result.map((order) => (
+          <tbody>
+            <tr>
+              <td>{order.orderId}</td>
+              <td>{order.customerId}</td>
+              <td>{order.dateReceived}</td>
+              <td>{order.datePromised}</td>
+              <td>{order.remarks}</td>
+              <td>{order.totalCharges}</td>
+              <td>{order.deposit}</td>
+              <td>{order.balanceDue}</td>
+            </tr>
+          </tbody>
+        ))}
+      </table>
     ) : (
       <p>Could not fetch data</p>
     )
